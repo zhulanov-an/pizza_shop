@@ -1,3 +1,6 @@
+	var i = 0;
 	function something(){
-		alert('Hello everyone!');
+
+		alert(i);
+		i = i + 1;
 	}
