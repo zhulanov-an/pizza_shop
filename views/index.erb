@@ -1,2 +1,52 @@
 <h2>Welcome to PizzaShop</h2>
-<button class = "btn btn-primary" onclick="something()">Click me!</button>
+
+<div class = "row">
+<% @products.each do |product| %>
+  <div class = "col-md-3">
+    <div><strong><%= product.title %></strong></div>
+  </div>
+  <% end %> 
+</div>
+
+<div class="row">
+<% @products.each do |product| %>
+   <div class = "col-md-3">
+      <img src="<%= product.path_to_image %>" class="img-rounded" width="200" height="150"/> 
+   </div>
+<% end %> 
+</div>
+
+<div class="row">
+  <% @products.each do |product| %>
+     <div class = "col-md-3">
+      <p class="text-justify"><%= product.description %></p>
+    </div>
+  <% end %> 
+</div>
+
+<div class="row">
+  <% @products.each do |product| %>
+     <div class = "col-md-3">
+        <div><strong>Price:</strong><%= product.price %></div>
+      </div>
+  <% end %> 
+</div>
+
+<div class="row">
+  <% @products.each do |product| %>
+     <div class = "col-md-3">
+        <div><strong>Size:</strong><%= product.size %></div>
+      </div>
+  <% end %> 
+</div>
+
+<div class="row">
+  <% @products.each do |product| %>
+     <div class = "col-md-3">
+     <form action="/product/<%= product.id %>" method="post">
+        <div><button class="btn btn-primary">Order!</button> </div>
+     </form>
+      </div>
+  <% end %> 
+</div>
+
