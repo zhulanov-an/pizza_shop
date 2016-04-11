@@ -9,9 +9,7 @@
     <div><strong>Price: </strong><%= product.price %></div>
     <div><strong>Size: </strong><%= product.size %></div>
   <div>
-    <form action="/product/<%= product.id %>" method="post">
-      <button class="btn btn-primary">Order!</button>
-    </form>
+    <button class="btn btn-success btn-sm" onclick="add_to_cart()">Add to cart!</button>
   </div>
   </div>
   <% end %> 

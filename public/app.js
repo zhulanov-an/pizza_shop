@@ -4,3 +4,7 @@ function something(){
     i = i * 1 + 1;
     window.localStorage.setItem('i', i);
 	}
+
+function add_to_cart(){
+	alert('Hello from function');
+}
