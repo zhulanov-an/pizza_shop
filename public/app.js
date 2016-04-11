@@ -1,6 +1,5 @@
-	var i = 0;
-	function something(){
-
+function something(){
+		var i = window.localStorage.getItem('i');
+		window.localStorage.setItem('i', 555);
 		alert(i);
-		i = i + 1;
 	}
