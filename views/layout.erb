@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leprosorium</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- common JS libs -->
+	<script src="/vendor/jquery-1.12.2.min.js"></script>
+	<script src="moment-with-locales.min.js"></script>
+
+	<!-- Bootstrap -->
+	<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+	
+	<!-- simplecolorpicker -->
+	<script src="/jquery.simplecolorpicker.js"></script>
+	<link rel="stylesheet" href="/jquery.simplecolorpicker.css" />
+	<!-- datetimepicker -->
+	<script src="/bootstrap-datetimepicker.min.js"></script>
+	<link rel="stylesheet" href="/bootstrap-datetimepicker.min.css" />
+
+	<script src="/app.js"></script>
+</head>
+<body>
+	<div class="container">
+		<!-- Static navbar -->
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/"><b>Leprosorium</b></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/about">About</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</nav>
+		<div>
+			<%if @error.is_a?(Array) && @error.size != 0 then %>
+			<div class="alert alert-danger">
+				<ul>
+					<% @error.each do |item| %>
+					<li><%= item %></li>
+					<% end %>
+				</ul>
+			</div>
+			<% end %>
+			<%= yield %>
+		</div>
+	</div>
+</body>
+</html>
