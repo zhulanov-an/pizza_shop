@@ -5,6 +5,6 @@ function something(){
     window.localStorage.setItem('i', i);
 	}
 
-function add_to_cart(){
-	alert('Hello from function');
+function add_to_cart(id){
+	alert('You added pizza with id: ' + id);
 }

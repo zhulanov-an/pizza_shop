@@ -8,9 +8,9 @@
     <div><p class="text-justify"><%= product.description %></p></div>
     <div><strong>Price: </strong><%= product.price %></div>
     <div><strong>Size: </strong><%= product.size %></div>
-  <div>
-    <button class="btn btn-success btn-sm" onclick="add_to_cart()">Add to cart!</button>
-  </div>
+    <div>
+      <button class="btn btn-success btn-sm" onclick="add_to_cart(<%= product.id %>)">Add to cart!</button>
+    </div>
   </div>
   <% end %> 
 </div>
