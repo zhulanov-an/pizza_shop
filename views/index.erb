@@ -1,52 +1,18 @@
 <h2>Welcome to PizzaShop</h2>
 
 <div class = "row">
-<% @products.each do |product| %>
+  <% @products.each do |product| %>
   <div class = "col-md-3">
     <div><strong><%= product.title %></strong></div>
+    <div><img src="<%= product.path_to_image %>" class="img-rounded" width="200" height="150"/></div>
+    <div><p class="text-justify"><%= product.description %></p></div>
+    <div><strong>Price: </strong><%= product.price %></div>
+    <div><strong>Size: </strong><%= product.size %></div>
+  <div>
+    <form action="/product/<%= product.id %>" method="post">
+      <button class="btn btn-primary">Order!</button>
+    </form>
+  </div>
   </div>
   <% end %> 
 </div>
-
-<div class="row">
-<% @products.each do |product| %>
-   <div class = "col-md-3">
-      <img src="<%= product.path_to_image %>" class="img-rounded" width="200" height="150"/> 
-   </div>
-<% end %> 
-</div>
-
-<div class="row">
-  <% @products.each do |product| %>
-     <div class = "col-md-3">
-      <p class="text-justify"><%= product.description %></p>
-    </div>
-  <% end %> 
-</div>
-
-<div class="row">
-  <% @products.each do |product| %>
-     <div class = "col-md-3">
-        <div><strong>Price:</strong><%= product.price %></div>
-      </div>
-  <% end %> 
-</div>
-
-<div class="row">
-  <% @products.each do |product| %>
-     <div class = "col-md-3">
-        <div><strong>Size:</strong><%= product.size %></div>
-      </div>
-  <% end %> 
-</div>
-
-<div class="row">
-  <% @products.each do |product| %>
-     <div class = "col-md-3">
-     <form action="/product/<%= product.id %>" method="post">
-        <div><button class="btn btn-primary">Order!</button> </div>
-     </form>
-      </div>
-  <% end %> 
-</div>
-
