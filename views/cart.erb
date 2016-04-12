@@ -1,0 +1,37 @@
+<h2>You are in cart</h2>
+<p>Check your order and do pay:)</p>
+<div class="bs-example" data-example-id="striped-table">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>id product</th>
+        <th>title</th>
+        <th>size</th>
+        <th>price for item</th>
+        <th>count</th>
+        <th>total by item</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+      <tr>
+        <th scope="row"><%= product.id %></th>
+        <td><%= product.title %></td>
+        <td><%= product.size %></td>
+        <td><%= product.price %></td>
+        <td><%= @hash_orders[(product.id).to_s] %></td>
+        <td><%= @hash_orders[(product.id).to_s].to_i * product.price %></td>
+      </tr>
+      <% end %>
+      <tr class='info'>
+        <th scope="row"></th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b>Total:</b></td>
+        <td><%= @total_sum %></td>
+      </tr>
+    </tbody>
+  </table>
+  <p></p>
+</div>

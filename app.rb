@@ -11,16 +11,42 @@ end
 
 get '/' do
   @products = Product.all
-	erb :index
+  erb :index
 end
 
 get '/about' do
 	erb :about
 end
 
+get '/cart' do
+  erb :cart
+end
+
 post '/cart' do
-  orders = params[:list_counts]
-  @products = Product.all
-  # product_1=3,product_4=4,product_2=5,product_3=7
-  erb :index
+  orders = false
+  orders = params[:list_orders]
+  redirect to '/' unless orders
+
+  @hash_orders = {}
+
+  # "product_1=3,product_4=4,product_2=5,product_3=7"
+  orders.split(',').each do |item|
+    temp_item = item.split('=')
+    id_product = temp_item[0].gsub('product_','')
+    value = temp_item[1].to_i
+    @hash_orders[id_product] = value
+  end
+  # {"1"=>3,"4"=>4,"2"=>5,"3"=>7}
+
+  # get total sum
+  @total_sum = 0
+  @hash_orders.each do |k,v|
+    @total_sum += (Product.find(k.to_i).price * v)
+  end
+
+  # for table cart
+  id_for_find = @hash_orders.keys.map{|x| x.to_i}
+  @products = Product.find(id_for_find)
+
+  erb :cart
 end
