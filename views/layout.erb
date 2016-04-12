@@ -22,6 +22,11 @@
 	<script src="/app.js"></script>
 </head>
 <body>
+	<script type="text/javascript">
+		$(function(){
+			total_item();
+		});
+	</script>
 	<div class="container">
 		<!-- Static navbar -->
 		<nav class="navbar navbar-default" role="navigation">
@@ -31,6 +36,7 @@
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="/about">About</a></li>
+					<li><a href="/cart" id="count"></a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</nav>

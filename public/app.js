@@ -8,6 +8,7 @@ function total_item(){
 		}
 	}
 	console.log(total);
+	document.getElementById("count").innerHTML = 'Count in your cart: ' + total;
 }
 
 function add_to_cart(id){
