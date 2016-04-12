@@ -23,9 +23,8 @@ get '/cart' do
 end
 
 post '/cart' do
-  orders = false
-  orders = params[:list_orders]
-  redirect to '/' unless orders
+  orders ||= params[:list_orders]
+  redirect to '/' if orders == nil || orders == ""
 
   @hash_orders = {}
 
@@ -49,4 +48,8 @@ post '/cart' do
   @products = Product.find(id_for_find)
 
   erb :cart
+end
+
+post '/order' do
+  erb "Hello order"
 end

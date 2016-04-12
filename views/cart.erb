@@ -10,6 +10,7 @@
         <th>price for item</th>
         <th>count</th>
         <th>total by item</th>
+        <th>action</th>
       </tr>
     </thead>
     <tbody>
@@ -21,6 +22,13 @@
         <td><%= product.price %></td>
         <td><%= @hash_orders[(product.id).to_s] %></td>
         <td><%= @hash_orders[(product.id).to_s].to_i * product.price %></td>
+        <td>
+          <form action='/cart' method='post'>
+            <input type = 'hidden' name='list_orders' id='orders_input_<%= product.id %>'></input>
+            <input type='submit' class='btn btn-primary btn-sm' onclick='remove_from_cart(<%= product.id %>)' value='Remove'>
+            </input>
+          </form>
+        </td>
       </tr>
       <% end %>
       <tr class='info'>
@@ -30,6 +38,11 @@
         <td></td>
         <td><b>Total:</b></td>
         <td><%= @total_sum %></td>
+        <td>
+          <form action='/order' method='post'>
+            <input type='submit' class='btn btn-success btn-md' value='Order'></input>
+          </form>
+        </td>
       </tr>
     </tbody>
   </table>
