@@ -20,5 +20,7 @@ end
 
 post '/cart' do
   orders = params[:list_counts]
+  @products = Product.all
   # product_1=3,product_4=4,product_2=5,product_3=7
+  erb :index
 end
