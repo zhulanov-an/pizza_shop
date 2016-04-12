@@ -25,6 +25,7 @@
 	<script type="text/javascript">
 		$(function(){
 			total_item_in_cart();
+			update_orders_in_cart();
 		});
 	</script>
 	<div class="container">
@@ -40,6 +41,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li>
 						<form action='/cart' method='post'>
+							<input type = 'text' name='list_orders' id='orders_input'></input>
 							<button id='count' class='btn btn-primary btn-lg'></button>
 						</form>
 					</li>

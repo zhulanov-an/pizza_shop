@@ -7,7 +7,7 @@ function total_item_in_cart(){
 			total = localStorage[i] * 1 + total;
 		}
 	}
-	document.getElementById("count").innerHTML = 'Count in your cart: ' + total;
+	$('#count').text('Count in your cart: ' + total);
 }
 
 function add_to_cart(id){
@@ -15,7 +15,8 @@ function add_to_cart(id){
 	x = window.localStorage.getItem(key);
 	x = x * 1 + 1
 	window.localStorage.setItem(key, x);
-	total_item_in_cart();
+	total_item_in_cart();//set count orders on button
+	update_orders_in_cart();//update text orders in hidden field
 }
 
 function orders_from_cart(){
@@ -29,6 +30,11 @@ function orders_from_cart(){
 			orders = orders + key + '=' + value + ',';
 		}
 	}
-	console.log(orders);
+	orders = orders.slice(0,-1);
+	return orders;
 }
 
+function update_orders_in_cart(){
+	var orders = orders_from_cart();
+	$('#orders_input').val(orders);
+}

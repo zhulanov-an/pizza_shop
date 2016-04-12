@@ -19,5 +19,6 @@ get '/about' do
 end
 
 post '/cart' do
-  erb 'Hello cart'
+  orders = params[:list_counts]
+  # product_1=3,product_4=4,product_2=5,product_3=7
 end
