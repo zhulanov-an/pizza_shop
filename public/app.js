@@ -1,14 +1,20 @@
-function something(){
-		var i = window.localStorage.getItem('i');
-		alert(i);
-    i = i * 1 + 1;
-    window.localStorage.setItem('i', i);
+function total_item(){
+	var total = 0
+	var template = 'product_'
+	for(var i in localStorage)
+		{
+		if (i.includes(template)){
+			total = localStorage[i] * 1 + total;
+		}
 	}
+	console.log(total);
+}
 
 function add_to_cart(id){
 	var key = 'product_' + id
 	x = window.localStorage.getItem(key);
 	x = x * 1 + 1
 	window.localStorage.setItem(key, x);
-	alert(x);
+	console.log('count item ' + x);
+	total_item();
 }
