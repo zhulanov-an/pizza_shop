@@ -61,7 +61,7 @@ post '/cart' do
 end
 
 post '/order' do
-  orders ||= params[:list_orders]
-  redirect to '/' if orders == nil || orders == ""
-  erb orders
+  # orders ||= params[:list_orders]
+  # redirect to '/' if orders == nil || orders == ""
+  erb :order
 end
