@@ -9,6 +9,10 @@ class Product < ActiveRecord::Base
 
 end
 
+class Order < ActiveRecord::Base
+
+end
+
 def get_param_product(row_orders)
   hash_orders = {}
   # "product_1=3,product_4=4,product_2=5,product_3=7"
