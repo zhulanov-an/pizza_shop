@@ -9,27 +9,27 @@
 <h2>Checkout page</h2>
 <p>On this page you can arrange the delivery of your order</p>
 
-<form action="/order" method="POST" role="form">
+<form action="/ordered" method="POST" role="form">
 
   <div class="form-group">
   <label>Your name:</label>
-    <input name="order[name_customer]" type="text" class="form-control" placeholder="Enter your name..." value="<%= @username %>">
+    <input name="order[name_customer]" type="text" class="form-control" placeholder="Enter your name..." value="<%= @ord.name_customer %>">
   </div>
 
   <div class="form-group">
     <label>Your phone:</label>
-    <input name="order[phone]" type="text" class="form-control" placeholder="Your phone" value="<%= @phone %>">
+    <input name="order[phone]" type="text" class="form-control" placeholder="Your phone" value="<%= @ord.phone %>">
   </div>
 
   <div class="form-group">
     <label>Your order from cart:</label>
-    <textarea class="form-control" rows="5" readonly name="order[composition_orders]"></textarea>
+    <textarea class="form-control" rows="5" readonly name="order[composition_orders]"><%= @text_orders %></textarea>
   </div>
 
   <div class="form-group">
     <label>When are you expect to receive the order?</label>
     <div class='input-group date' id='datetimepick'>
-      <input type='text' class="form-control" name="name[datetime_delivery]" />
+      <input type='text' class="form-control" name="order[datetime_delivery]" value="<%= @ord.datetime_delivery %>" />
       <span class="input-group-addon">
         <span class="glyphicon glyphicon-calendar"></span>
       </span>
@@ -38,7 +38,8 @@
 
   <div class="form-group">
     <label>Total for pay</label>
-    <input name="order[total_price]" type="text" class="form-control" readonly >
+    <input name="order[total_price]" type="text" class="form-control" readonly value="<%= @total_sum %>">
+    </input>
   </div>
 
   <button type="submit" class="btn btn-primary btn-lg">Place my order</button>

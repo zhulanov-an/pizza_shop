@@ -40,7 +40,8 @@
         <td><%= @total_sum %></td>
         <td>
           <form action='/order' method='post'>
-            <input type='submit' class='btn btn-success btn-md' value='Order'></input>
+            <input type = 'hidden' name='list_orders' id='orders_checkout'></input>
+            <input type='submit' class='btn btn-success btn-md' onclick='checkout()' value='Order'></input>
           </form>
         </td>
       </tr>

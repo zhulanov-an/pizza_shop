@@ -10,7 +10,9 @@ class Product < ActiveRecord::Base
 end
 
 class Order < ActiveRecord::Base
-
+  validates :name_customer, {presence: true, length:{minimum: 3, maximum: 60}}
+  validates :phone, {presence: true, length:{minimum: 10}}
+  validates :datetime_delivery, {presence: true}
 end
 
 def get_param_product(row_orders)
@@ -24,6 +26,17 @@ def get_param_product(row_orders)
   end
   return hash_orders
   # {"1"=>3,"4"=>4,"2"=>5,"3"=>7}
+end
+
+def get_string_order(hash)
+  str_orders = ""
+  # {"1"=>3,"4"=>4,"2"=>5,"3"=>7}
+  hash.each do |k,v|
+    title = Product.find(k.to_i).title
+    count = v
+    str_orders +="#{title} = #{count}\n"
+  end
+  return str_orders
 end
 
 get '/' do
@@ -60,8 +73,34 @@ post '/cart' do
   erb :cart
 end
 
+# from cart to order
 post '/order' do
-  # orders ||= params[:list_orders]
-  # redirect to '/' if orders == nil || orders == ""
+  @ord = Order.new
+  orders ||= params[:list_orders]
+  redirect to '/' if orders == nil || orders == ""
+
+  hash_orders = get_param_product(orders)
+  @total_sum = 0
+  hash_orders.each do |k,v|
+    @total_sum += (Product.find(k.to_i).price * v)
+  end
+  
+  id_for_find = hash_orders.keys.map{|x| x.to_i}
+  products = Product.find(id_for_find)
+  @text_orders = get_string_order(hash_orders)
   erb :order
+end
+
+post '/ordered' do
+  @ord = Order.new(params[:order])
+  @text_orders = @ord.composition_orders
+  @total_sum = @ord.total_price
+
+  if @ord.save
+    erb :ordered
+  else
+    @errors = @ord.errors.full_messages.first
+    erb :order
+  end
+
 end

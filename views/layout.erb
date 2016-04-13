@@ -50,17 +50,14 @@
 		</nav>
 
 		<div>
-			<%if @error.is_a?(Array) && @error.size != 0 then %>
+			<%if @errors then %>
 			<div class="alert alert-danger">
 				<ul>
-					<% @error.each do |item| %>
-					<li><%= item %></li>
-					<% end %>
+					<li><%= @errors %></li>
 				</ul>
 			</div>
 			<% end %>
 			<%= yield %>
 		</div>
-	</div>
 </body>
 </html>
