@@ -9,6 +9,19 @@ class Product < ActiveRecord::Base
 
 end
 
+def get_param_product(row_orders)
+  hash_orders = {}
+  # "product_1=3,product_4=4,product_2=5,product_3=7"
+  row_orders.split(',').each do |item|
+    temp_item = item.split('=')
+    id_product = temp_item[0].gsub('product_','')
+    value = temp_item[1].to_i
+    hash_orders[id_product] = value
+  end
+  return hash_orders
+  # {"1"=>3,"4"=>4,"2"=>5,"3"=>7}
+end
+
 get '/' do
   @products = Product.all
   erb :index
@@ -18,23 +31,16 @@ get '/about' do
 	erb :about
 end
 
-get '/cart' do
-  erb :cart
-end
+# get '/cart' do
+#   erb :cart
+# end
 
 post '/cart' do
   orders ||= params[:list_orders]
   redirect to '/' if orders == nil || orders == ""
 
-  @hash_orders = {}
-
   # "product_1=3,product_4=4,product_2=5,product_3=7"
-  orders.split(',').each do |item|
-    temp_item = item.split('=')
-    id_product = temp_item[0].gsub('product_','')
-    value = temp_item[1].to_i
-    @hash_orders[id_product] = value
-  end
+  @hash_orders = get_param_product(orders)
   # {"1"=>3,"4"=>4,"2"=>5,"3"=>7}
 
   # get total sum
@@ -51,5 +57,7 @@ post '/cart' do
 end
 
 post '/order' do
-  erb "Hello order"
+  orders ||= params[:list_orders]
+  redirect to '/' if orders == nil || orders == ""
+  erb orders
 end
