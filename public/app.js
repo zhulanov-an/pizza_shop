@@ -25,8 +25,9 @@ function add_to_cart(id){
 function remove_from_cart(id){
 	var key = 'product_' + id;
 	window.localStorage.removeItem(key);
-	var orders = orders_from_cart();
-	$('#orders_input_' + id).val(orders);
+	// var orders = orders_from_cart();
+	// $('#orders_input_' + id).val(orders);
+	$('#' + key).hide();
 	total_item_in_cart();//set count orders on button
 	update_orders_in_cart();//update text orders in hidden field
 }

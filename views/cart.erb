@@ -15,7 +15,7 @@
     </thead>
     <tbody>
       <% @products.each do |product| %>
-      <tr>
+      <tr id="product_<%= product.id %>">
         <th scope="row"><%= product.id %></th>
         <td><%= product.title %></td>
         <td><%= product.size %></td>
@@ -23,10 +23,8 @@
         <td><%= @hash_orders[(product.id).to_s] %></td>
         <td><%= @hash_orders[(product.id).to_s].to_i * product.price %></td>
         <td>
-          <form action='/cart' method='post'>
-            <input type = 'hidden' name='list_orders' id='orders_input_<%= product.id %>'></input>
+
             <input type='submit' class='btn btn-primary btn-sm' onclick='remove_from_cart(<%= product.id %>)' value='Remove'>
-            </input>
           </form>
         </td>
       </tr>
@@ -39,7 +37,7 @@
         <td><b>Total:</b></td>
         <td><%= @total_sum %></td>
         <td>
-          <form action='/order' method='post'>
+          <form action='/cart' method='post'>
             <input type = 'hidden' name='list_orders' id='orders_checkout'></input>
             <input type='submit' class='btn btn-success btn-md' onclick='checkout()' value='Order'></input>
           </form>
