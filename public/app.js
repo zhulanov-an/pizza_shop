@@ -1,5 +1,5 @@
 // отображение на кнопке количества позиций
-function total_item_in_cart(){
+function set_total_item_on_button(){
 	var total = 0
 	var template = 'product_'
 	for(var i in localStorage)
@@ -17,7 +17,7 @@ function add_to_cart(id){
 	x = window.localStorage.getItem(key);
 	x = x * 1 + 1
 	window.localStorage.setItem(key, x);
-	total_item_in_cart();//set count orders on button
+	set_total_item_on_button();//set count orders on button
 	update_orders_in_cart();//update text orders in hidden field
 }
 
@@ -25,18 +25,15 @@ function add_to_cart(id){
 function remove_from_cart(id){
 	var key = 'product_' + id;
 	window.localStorage.removeItem(key);
-	// var orders = orders_from_cart();
-	// $('#orders_input_' + id).val(orders);
 	$('#' + key).hide();
-	total_item_in_cart();//set count orders on button
+	set_total_sum();
+	set_total_item_on_button();//set count orders on button
 	update_orders_in_cart();//update text orders in hidden field
+	checkout();
+	remove_order_button();
 }
 
-// отправка из корзины на оформление
-function checkout(){
-	var orders = orders_from_cart();
-	$('#orders_checkout').val(orders);
-}
+
 
 // получение строки с заказами
 function orders_from_cart(){
@@ -54,13 +51,48 @@ function orders_from_cart(){
 	return orders;
 }
 
+// обновление заказов в корзине в скрытой форме
 function update_orders_in_cart(){
 	var orders = orders_from_cart();
 	$('#orders_input').val(orders);
 }
 
+//обновление строки из корзины на оформление
+function checkout(){
+	var orders = orders_from_cart();
+	$('#orders_checkout').val(orders);
+}
 
+// очистка корзины после оплаты
 function clear_cart(){
 	window.localStorage.clear();
 	$('#count').hide();
+}
+
+//обновление и отображение общей суммы заказа в корзине
+function set_total_sum(){
+	var sum = 0;
+	$(".price").each(function() {
+		var visible = $(this).is(':visible');
+    var value = $(this).text();
+    // add only if the value is number
+    if(!isNaN(value) && value.length != 0 && visible == true) {
+        sum += parseFloat(value);
+    }
+		});
+	sum = (sum).toFixed(1);
+	$('#total_sum').text(sum);
+}
+
+function remove_order_button(){
+	var count = 0
+	$(".price").each(function() {
+		var visible = $(this).is(':visible');
+    if(visible == true) {
+        count += 1;
+    }
+		});
+	if (count == 0){
+		$('.info').hide();
+	}
 }

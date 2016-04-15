@@ -21,9 +21,8 @@
         <td><%= product.size %></td>
         <td><%= product.price %></td>
         <td><%= @hash_orders[(product.id).to_s] %></td>
-        <td><%= @hash_orders[(product.id).to_s].to_i * product.price %></td>
+        <td class='price'><%= @hash_orders[(product.id).to_s].to_i * product.price %></td>
         <td>
-
             <input type='submit' class='btn btn-primary btn-sm' onclick='remove_from_cart(<%= product.id %>)' value='Remove'>
           </form>
         </td>
@@ -35,9 +34,9 @@
         <td></td>
         <td></td>
         <td><b>Total:</b></td>
-        <td><%= @total_sum %></td>
+        <td id='total_sum'></td>
         <td>
-          <form action='/cart' method='post'>
+          <form action='/order' method='post'>
             <input type = 'hidden' name='list_orders' id='orders_checkout'></input>
             <input type='submit' class='btn btn-success btn-md' onclick='checkout()' value='Order'></input>
           </form>
@@ -47,3 +46,8 @@
   </table>
   <p></p>
 </div>
+<script type="text/javascript">
+    $(function(){
+      checkout();
+    });
+  </script>
