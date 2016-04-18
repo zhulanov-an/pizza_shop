@@ -104,3 +104,7 @@ post '/ordered' do
   end
 
 end
+
+get '/admin' do
+  erb :admin
+end
